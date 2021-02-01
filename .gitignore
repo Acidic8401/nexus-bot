@@ -1,0 +1,5 @@
+
+.env
+*.pyc
+cogs/__pycache__/blacklist.cpython-37.pyc
+cogs/__pycache__/blacklist.cpython-37.pyc
