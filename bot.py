@@ -15,7 +15,7 @@ def get_prefix(client, message):
 
     return prefixes[str(message.guild.id)]
 
-client = commands.Bot(command_prefix=get_prefix)
+client = commands.Bot(command_prefix=get_prefix, intents=intents)
 
 @client.event
 async def on_ready():
@@ -25,7 +25,7 @@ async def on_ready():
 async def on_guild_join(guild):
     with open('prefixes.json', 'r') as f:
         prefixes=json.load(f)
-    
+        
     prefixes[str(guild.id)] = '~'
 
     with open('prefixes.json', 'w') as f:

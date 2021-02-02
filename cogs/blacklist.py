@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import json
 import datetime
+import embeds
 
 class Blacklist(commands.Cog):
     def __init__(self, client):
@@ -17,12 +18,7 @@ class Blacklist(commands.Cog):
             channel_id=servers[str(guild.name)]["channel"]
             if channel_id is not "None":
                 channel=blacklist.get_channel(channel_id)
-                ban_em=discord.Embed(
-                    title="A member has been banned",
-                    description=f"{user.mention} has been banned from the server {guild.name}",
-                    color=discord.Color.red()
-                )
-                ban_em.add_field(name="**Info:**", value=f"Time of ban: {time}")
+                ban_em=embeds.ban_em(user, guild, time)
                 await channel.send("Member banned", embed=ban_em)
             else:
                 pass

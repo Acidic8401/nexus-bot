@@ -1,6 +1,7 @@
 import discord 
 from discord.ext import commands
 import json
+import embeds
 
 class Staff(commands.Cog):
     def __init__(self, client):
@@ -44,11 +45,36 @@ class Staff(commands.Cog):
                             in_exchange=exchange.get_member(member.id)
                             try:
                                 in_exchange.add_roles(role, reason='Verification',atomic=True)
+                                embed=embeds.verify_ex_em(member.guild)
+                                await member.send("Welcome!", embed=embed)
                             except discord.Forbidden:
                                 print('Forbidden')
                         else:
                             pass
                 else:
                     pass
-        else:
-            pass
+        #elif member.guild.id==699852946363514902:
+        #    ob=self.client.get_guild(798525391308193812)
+        #    blist=self.client.get_guild(699852946363514902)
+        #    print('got servers')
+        #    if member in ob.members:
+        #        testr=ob.get_role(801178473979969547)
+        #        ob_mem = ob.get_member(member.id)
+        #        print('got test role and ob mem')
+        #        if testr in ob_mem.roles:
+        #            blist_role=blist.get_role(699890121473785856)
+        #            print('attempting to add role')
+        #            await member.add_roles(blist_role)
+        #            embed=embeds.verify_ex_em(member.guild)
+        #            await member.send("Welcome!", embed=embed)
+
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        print('member joined')
+        if member.guild.id==694841846794289242: #or member.guild.id==699852946363514902:
+            print('calling function')
+            await self.update(member)
+
+def setup(client):
+    client.add_cog(Staff(client))
