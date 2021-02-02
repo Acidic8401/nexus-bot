@@ -7,6 +7,7 @@ load_dotenv()
 token=os.getenv("BOT_TOKEN")
 intents=discord.Intents.default()
 intents.bans=True
+intents.members=True
 
 def get_prefix(client, message):
     with open('prefixes.json', 'r') as f:
